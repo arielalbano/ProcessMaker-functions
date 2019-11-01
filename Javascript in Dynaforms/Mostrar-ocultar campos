@@ -1,0 +1,29 @@
+
+//función para mostrar u ocultar un campo de un Dynaform según el valor de una variable 
+function mostrarSegunBooleanVariable() {
+  
+	if( $("#booleanVariable").getValue() == 1) {
+    $("#campoMostrado").hide(); // esconde el campo
+     $("#campoMostrado").disableValidation(); //desactiva las validaciones que tenga el campo
+       } else {
+       $("#campoMostrado").show(); //muestra el campo
+     $("#campoMostrado").enableValidation(); //activa las validaciones que tenga el campo
+ }
+};
+$("#booleanVariable").setOnchange( mostrarSegunBooleanVariable ); //ejecutar la función si el valor de la variable cambia
+mostrarSegunBooleanVariable(); //ejecutar la función al cargar el formulario
+
+//función para mostrar u ocultar un campo o grilla de un Dynaform según el valor de campo en una grilla
+function mostrarGrillaSegunOtraGrilla() {
+  var gridId = 'grillaUno'; //reemplazar por el nombre de la grilla usada de base
+  var aGridVals = $("#"+gridId).getValue(); //carga la variable con los valores de la grilla base
+  $("#grillaDos").hide(); //esconde la grilla
+  $("#grillaDos").disableValidation(); //desactiva la validación
+  for (i = 0; i < aGridVals.length; i++) { //recorre todo el largo del arreglo 
+	if (aGridVals[i][0] == 'X valor'){ //si cualquier fila de la primera columna (en el arreglo la primer columna es 0) posee X valor  
+      $("#grillaDos").show(); //mostrar grillaDos
+     $("#grillaDos").enableValidation();} //activar validación
+             ;}
+  }
+
+mostrarGrillaSegunOtraGrilla();
