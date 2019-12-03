@@ -1,0 +1,63 @@
+//código de un trigger para que guarde la grilla con formato tabla en una variable (agregar como oculta en formulario):
+
+@@tablaComputacion = '';
+@@tablaCompras = '';
+@@tablaStock = '';
+
+if (@@mostrarGrillaComputacion == 'Si') {
+
+   @@tablaComputacion = "<table><tbody>\n<tr><th> Bienes informáticos solicitados </th><th> Descripción </th><th>Cantidad</th></tr>\n";
+
+      foreach (@=grillaComputacion as $aRow) {
+       @@tablaComputacion .= '<tr><td>'.$aRow['detalle4'].'</td><td>'.$aRow['descripcion4'].'</td><td>'.$aRow['cantidad4']."</td></tr>\n";
+   }   
+};
+
+if (@@mostrarGrillaCompras == 'Si') {
+
+   @@tablaCompras = "<table><tbody>\n<tr><th>Bienes departamentales solicitados</th><th> Descripción </th><th>Cantidad</th></tr>\n";
+
+      foreach (@=grillaCompras as $aRow) {
+       @@tablaCompras .= '<tr><td>'.$aRow['detalle1'].'</td><td>'.$aRow['descripcion1'].'</td><td>'.$aRow['cantidad1']."</td></tr>\n";
+   }   
+};
+
+if (@@mostrarGrillaStock == 'Si') {
+
+   @@tablaStock = "<table><tbody>\n<tr><th>Bienes en stock</th><th> Descripción </th><th>Cantidad</th></tr>\n";
+
+      foreach (@=grillaStockSEI as $aRow) {
+       @@tablaStock .= '<tr><td>'.$aRow['detalle2'].'</td><td>'.$aRow['descripcion2'].'</td><td>'.$aRow['cantidad2']."</td></tr>\n";
+   }   
+};
+@@tablaComputacion .= '</tbody></table>'; 
+@@tablaCompras .= '</tbody></table>'; 
+@@tablaStock .= '</tbody></table>'; 
+
+
+//código html para incluir variables y grillas en cualquier plantilla (ya sea un doc de salida o un evento mail):
+
+<html>
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    table-layout:fixed;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<p>@#autorizadorNivelUno: le informamos que @#solicitante realiz&oacute; una solicitud de bienes con el siguiente detalle:</p>
+<p></p>
+<p>@#tablaCompras</p>
+<p>@#tablaComputacion</p>
+<p>@#tablaStock</p>
+<p></p>
+<p>Gerencia de Compras y Contrataciones.</p>
+</body>
+</html>
